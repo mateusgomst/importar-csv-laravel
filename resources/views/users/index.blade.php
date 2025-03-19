@@ -8,13 +8,20 @@
 </head>
 <body>
 
-    @if ($errors->any()){
-        @foreach ($errors as $erro)
-            
+    @session('success')
+        <p style="color: #086">{!! $value !!}</p>        
+    @endsession
+
+    @session('error')
+        <p style="color: #f00">{!! $value !!}</p>        
+    @endsession
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <p style="color: #f00;"> {{ $error }}</p>
         @endforeach
-    }
-        
     @endif
+
     <form action="{{route('user.import')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
